@@ -26,7 +26,6 @@
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
-    overflow-x: hidden;
     background: var(--paper);
     color: var(--ink);
     font-family: var(--sans);
@@ -34,10 +33,12 @@
     min-height: 100dvh;
     display: grid;
     place-items: center;
+    /* The implicit grid column is auto-sized, i.e. to max-content, so a long
+       line made the column wider than the phone and the text got clipped.
+       minmax(0, 1fr) lets the column shrink below its content width. */
+    grid-template-columns: minmax(0, 1fr);
     padding: 2rem;
   }
-  /* width:100% matters: place-items:center makes the box shrink-to-fit its content,
-     so max-width alone let long lines push it wider than a phone screen. */
   main { max-width: 34rem; width: 100%; }
   h1 { font-size: clamp(2rem, 7vw, 3.25rem); margin: 0 0 .75rem; letter-spacing: -0.02em; }
   .claim { color: var(--main); font-size: clamp(1rem, 3.5vw, 1.2rem); margin: 0 0 2rem; }
