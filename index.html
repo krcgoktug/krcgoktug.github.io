@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Göktuğ Karaca</title>
+<meta name="description" content="Backend engineer. Portfolio in progress.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  /* Week 3 identity kit, as tokens. The blank page already carries the palette so
+     next week's build is filling a shell, not choosing colours again. */
+  :root {
+    --ink:     #12161C;
+    --paper:   #FBFBF9;
+    --main:    #1F4B6E;
+    --accent:  #B4531F;
+    --muted:   #646669;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --ink: #FBFBF9; --paper: #12161C; --main: #7FB2D8; --accent: #E08A4E; --muted: #9A9CA0; }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.6;
+    min-height: 100dvh;
+    display: grid;
+    place-items: center;
+    padding: 2rem;
+  }
+  main { max-width: 34rem; }
+  h1 { font-size: clamp(2rem, 7vw, 3.25rem); margin: 0 0 .75rem; letter-spacing: -0.02em; }
+  .claim { color: var(--main); font-size: clamp(1rem, 3.5vw, 1.2rem); margin: 0 0 2rem; }
+  .status {
+    font-family: var(--mono);
+    font-size: .85rem;
+    color: var(--muted);
+    border-left: 3px solid var(--accent);
+    padding-left: .9rem;
+    margin: 0 0 2rem;
+  }
+  ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 1.25rem; }
+  a { color: var(--main); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { color: var(--accent); }
+  footer { margin-top: 3rem; font-size: .8rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Göktuğ Karaca</h1>
+  <p class="claim">I build backend services, and I can tell you how each one fails.</p>
+
+  <p class="status">
+    empty but live &mdash; week 4<br>
+    the case studies land here next week
+  </p>
+
+  <ul>
+    <li><a href="https://github.com/krcgoktug">GitHub</a></li>
+    <li><a href="mailto:karacagoktug73@gmail.com">Email</a></li>
+  </ul>
+
+  <footer>Built as plain HTML on GitHub Pages. No build step, nothing to break.</footer>
+</main>
+</body>
+</html>
