@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FL-05 MCP evidence</title>
+<style>
+  :root { color-scheme:dark; --bg:#0b1020; --panel:#111827; --ink:#e5e7eb; --muted:#94a3b8; --green:#34d399; --blue:#60a5fa; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:auto; }
+  body { margin:0; padding:32px; background:var(--bg); color:var(--ink); font:16px/1.45 ui-monospace,SFMono-Regular,Consolas,monospace; }
+  header,section,footer { max-width:1120px; margin-left:auto; margin-right:auto; }
+  header { margin-bottom:24px; }
+  h1 { margin:0 0 8px; font:700 30px/1.2 system-ui,sans-serif; }
+  header p,.why,footer { color:var(--muted); }
+  section { min-height:620px; margin-bottom:28px; padding:28px; background:var(--panel); border:1px solid #263248; border-radius:14px; scroll-margin-top:24px; }
+  h2 { margin:0 0 8px; color:var(--blue); font:700 23px/1.25 system-ui,sans-serif; }
+  .label { margin-top:18px; color:var(--green); font-weight:700; }
+  pre { white-space:pre-wrap; overflow-wrap:anywhere; margin:8px 0 0; padding:16px; background:#080d18; border-radius:9px; border-left:3px solid #334155; }
+</style>
+</head>
+<body>
+<header><h1>FL-05 · three real MCP tool calls</h1><p>From the unedited JSON-RPC transcript in the public workflow repository.</p></header>
+<section id="task-1">
+  <h2>Task 1 · read the local filesystem and git</h2>
+  <p class="why">A plain chat cannot inspect repository paths or count local commits.</p>
+  <div class="label">CLIENT → MCP SERVER</div>
+  <pre>{"method":"tools/call","params":{"name":"list_repos","arguments":{}},"id":5}</pre>
+  <div class="label">MCP SERVER → CLIENT</div>
+  <pre>repos/flyrank-task-api                    ok   19 commits
+repos/flyrank-auth-api                    ok    8 commits
+repos/flyrank-polite-scraper              ok    7 commits
+repos/flyrank-capstone-metering-billing   ok    7 commits
+repos/tabforge-agent                      ok    1 commit</pre>
+</section>
+<section id="task-2">
+  <h2>Task 2 · extract facts from one repository</h2>
+  <p class="why">The tool opens a repository on disk, runs git, counts files, and reads README structure.</p>
+  <div class="label">CLIENT → MCP SERVER</div>
+  <pre>{"method":"tools/call","params":{"name":"gather_facts","arguments":{"repo":"repos/flyrank-auth-api"}},"id":6}</pre>
+  <div class="label">MCP SERVER → CLIENT</div>
+  <pre>{
+  "repo": "repos/flyrank-auth-api",
+  "commit_count": 8,
+  "file_count": 11,
+  "readme_chars": 6777,
+  "readme_headings": [
+    "# Auth API — login, tokens, and routes that actually check",
+    "## Run it", "## Endpoints",
+    "## What the verification actually found", "## Still open"
+  ]
+}</pre>
+</section>
+<section id="task-3">
+  <h2>Task 3 · audit a draft deterministically</h2>
+  <p class="why">The tool returns exact rule violations instead of asking a model to grade itself.</p>
+  <div class="label">CLIENT → MCP SERVER</div>
+  <pre>{"method":"tools/call","params":{"name":"check_house_rules","arguments":{"text":"We built a robust, seamless service that cut errors by 40% and handles requests in under 50ms."}},"id":7}</pre>
+  <div class="label">MCP SERVER → CLIENT</div>
+  <pre>RULE 1 | '40%' | a number — confirm it appears in the source facts
+RULE 1 | '50ms' | a number — confirm it appears in the source facts
+RULE 5 | 'robust' | replace with the evidence itself
+RULE 5 | 'seamless' | replace with the evidence itself</pre>
+</section>
+<footer>Source: github.com/krcgoktug/flyrank-workflow-agent/blob/master/docs/mcp-session.txt</footer>
+</body>
+</html>
