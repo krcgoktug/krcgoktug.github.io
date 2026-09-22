@@ -158,6 +158,7 @@
      on this page gets. 44px min-height because it is a link on a phone. */
   .badge {
     display: inline-flex; align-items: center; gap: .55rem; min-height: 44px;
+    max-width: 100%; line-height: 1.45;
     margin-top: 1.1rem; padding: .5rem .9rem;
     border: 1px solid var(--rule); border-radius: var(--r-pill);
     color: var(--muted); text-decoration: none; font-size: var(--t-xs);
@@ -165,6 +166,7 @@
   }
   .badge:hover { border-color: var(--main); color: var(--main); }
   .badge .mark {
+    flex: 0 0 auto;
     display: inline-flex; align-items: center; justify-content: center;
     width: 22px; height: 22px; border-radius: var(--r-chip);
     background: var(--main); color: var(--paper);
@@ -316,7 +318,7 @@
      rel="noopener" target="_blank"
      title="Check this credential on FlyRank's public verification page">
     <span class="mark" aria-hidden="true">FR</span>
-    FlyRank AI Internship · verify <span class="ref">FR-D1-02C09-C281E</span>
+    <span>FlyRank AI Internship · verify <span class="ref">FR-D1-02C09-C281E</span></span>
   </a>
 </footer>
 
